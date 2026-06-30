@@ -27,9 +27,8 @@ In this mode, agentgateway:
 
 The following examples show how to configure the authorization server proxy mode with Keycloak and Auth0.
 
-{{< tabs items="Keycloak,Auth0" >}}
-{{% tab tabName="Keycloak" %}}
-
+{{< tabs >}}
+{{% tab name="Keycloak" %}}
 ```yaml
 mcpAuthentication:
   issuer: http://localhost:7080/realms/mcp
@@ -50,8 +49,7 @@ mcpAuthentication:
 ```
 
 {{% /tab %}}
-{{% tab tabName="Auth0" %}}
-
+{{% tab name="Auth0" %}}
 ```yaml
 mcpAuthentication:
   issuer: https://<your-auth0-domain>/

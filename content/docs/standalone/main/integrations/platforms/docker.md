@@ -10,9 +10,9 @@ Run agentgateway as a Docker container for local development or small deployment
 
 Get started in under a minute with your preferred LLM provider.
 
-{{< tabs items="OpenAI,Anthropic,xAI (Grok),Ollama,Azure OpenAI,Amazon Bedrock,Google Gemini" >}}
+{{< tabs >}}
 
-{{% tab %}}
+{{% tab name="OpenAI" %}}
 
 ```bash
 # Set your API key
@@ -31,7 +31,7 @@ llm:
 EOF
 
 # Run agentgateway
-docker run -v ./config.yaml:/config.yaml -p 3000:3000 \
+docker run -v "$PWD/config.yaml:/config.yaml" -p 3000:3000 \
   -e OPENAI_API_KEY=$OPENAI_API_KEY \
   cr.agentgateway.dev/agentgateway:v{{< reuse "agw-docs/versions/n-patch.md" >}} -f /config.yaml
 
@@ -43,7 +43,7 @@ curl http://localhost:3000/v1/chat/completions \
 
 {{% /tab %}}
 
-{{% tab %}}
+{{% tab name="Anthropic" %}}
 
 ```bash
 # Set your API key
@@ -62,7 +62,7 @@ llm:
 EOF
 
 # Run agentgateway
-docker run -v ./config.yaml:/config.yaml -p 3000:3000 \
+docker run -v "$PWD/config.yaml:/config.yaml" -p 3000:3000 \
   -e ANTHROPIC_API_KEY=$ANTHROPIC_API_KEY \
   cr.agentgateway.dev/agentgateway:v{{< reuse "agw-docs/versions/n-patch.md" >}} -f /config.yaml
 
@@ -74,7 +74,7 @@ curl http://localhost:3000/v1/chat/completions \
 
 {{% /tab %}}
 
-{{% tab %}}
+{{% tab name="xAI (Grok)" %}}
 
 ```bash
 # Set your xAI API key
@@ -94,7 +94,7 @@ llm:
 EOF
 
 # Run agentgateway
-docker run -v ./config.yaml:/config.yaml -p 3000:3000 \
+docker run -v "$PWD/config.yaml:/config.yaml" -p 3000:3000 \
   -e XAI_API_KEY=$XAI_API_KEY \
   cr.agentgateway.dev/agentgateway:v{{< reuse "agw-docs/versions/n-patch.md" >}} -f /config.yaml
 
@@ -106,7 +106,7 @@ curl http://localhost:3000/v1/chat/completions \
 
 {{% /tab %}}
 
-{{% tab %}}
+{{% tab name="Ollama" %}}
 
 ```bash
 # Start Ollama (if not already running)
@@ -128,7 +128,7 @@ llm:
 EOF
 
 # Run agentgateway (use host.docker.internal to reach Ollama on the host)
-docker run -v ./config.yaml:/config.yaml -p 3000:3000 \
+docker run -v "$PWD/config.yaml:/config.yaml" -p 3000:3000 \
   --add-host=host.docker.internal:host-gateway \
   cr.agentgateway.dev/agentgateway:v{{< reuse "agw-docs/versions/n-patch.md" >}} -f /config.yaml
 
@@ -140,7 +140,7 @@ curl http://localhost:3000/v1/chat/completions \
 
 {{% /tab %}}
 
-{{% tab %}}
+{{% tab name="Azure OpenAI" %}}
 
 ```bash
 # Set your Azure OpenAI credentials
@@ -163,7 +163,7 @@ llm:
 EOF
 
 # Run agentgateway
-docker run -v ./config.yaml:/config.yaml -p 3000:3000 \
+docker run -v "$PWD/config.yaml:/config.yaml" -p 3000:3000 \
   -e AZURE_OPENAI_API_KEY=$AZURE_OPENAI_API_KEY \
   -e AZURE_DEPLOYMENT=$AZURE_DEPLOYMENT \
   -e AZURE_ENDPOINT=$AZURE_ENDPOINT \
@@ -177,7 +177,7 @@ curl http://localhost:3000/v1/chat/completions \
 
 {{% /tab %}}
 
-{{% tab %}}
+{{% tab name="Amazon Bedrock" %}}
 
 ```bash
 # Set your AWS credentials
@@ -198,7 +198,7 @@ llm:
 EOF
 
 # Run agentgateway
-docker run -v ./config.yaml:/config.yaml -p 3000:3000 \
+docker run -v "$PWD/config.yaml:/config.yaml" -p 3000:3000 \
   -e AWS_ACCESS_KEY_ID=$AWS_ACCESS_KEY_ID \
   -e AWS_SECRET_ACCESS_KEY=$AWS_SECRET_ACCESS_KEY \
   -e AWS_REGION=$AWS_REGION \
@@ -212,7 +212,7 @@ curl http://localhost:3000/v1/chat/completions \
 
 {{% /tab %}}
 
-{{% tab %}}
+{{% tab name="Google Gemini" %}}
 
 ```bash
 # Set your API key
@@ -231,7 +231,7 @@ llm:
 EOF
 
 # Run agentgateway
-docker run -v ./config.yaml:/config.yaml -p 3000:3000 \
+docker run -v "$PWD/config.yaml:/config.yaml" -p 3000:3000 \
   -e GEMINI_API_KEY=$GEMINI_API_KEY \
   cr.agentgateway.dev/agentgateway:v{{< reuse "agw-docs/versions/n-patch.md" >}} -f /config.yaml
 
@@ -250,7 +250,7 @@ curl http://localhost:3000/v1/chat/completions \
 By default, the agentgateway admin UI listens on localhost. To access it from your host machine:
 
 ```bash
-docker run -v ./config.yaml:/config.yaml -p 3000:3000 \
+docker run -v "$PWD/config.yaml:/config.yaml" -p 3000:3000 \
   -p 127.0.0.1:15000:15000 -e ADMIN_ADDR=0.0.0.0:15000 \
   -e OPENAI_API_KEY=$OPENAI_API_KEY \
   cr.agentgateway.dev/agentgateway:v{{< reuse "agw-docs/versions/n-patch.md" >}} -f /config.yaml
